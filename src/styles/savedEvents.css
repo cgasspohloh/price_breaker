@@ -1,0 +1,35 @@
+#event-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .savedEvent {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 200px;
+    position: relative;
+  }
+
+  .savedEvent p {
+    margin: 0px;
+  }
+  
+  .eventName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .deleteEventButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #ff0000;
+    font-weight: bolder;
+    font-size: large;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+  }
+  

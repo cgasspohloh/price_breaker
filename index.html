@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/dist/main.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="/src/styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="/src/styles/savedEvents.css">
+  <link rel="icon" href="/src/img/favicon/favicon.ico" type="image/x-icon" />
+  <title>Price Breaker V1.0</title>
+</head>
+<body>
+  <div id="content">
+
+    <h1>Price Breaker</h1>
+
+    <form id="eventIdForm">
+      <label for="eventId">Event ID:</label>
+      <input type="text" id="eventId" name="eventId" required>
+      <button type="submit">Add Event</button>
+    </form>
+
+    <div id="savedEvents">
+      <h2>Events</h2>
+      <div id="event-container">
+        <!-- saved events render here-->
+      </div>
+    </div>
+
+    <div id="eventDetailResult">
+      <h2 id="eventName"></h2>
+      <p id="eventDate"></p>
+      <p id="location"></p>
+      <a id="eventLink" href="#" target="_blank"></a>
+    </div>
+
+    <div id="result"></div>
+
+  </div>
+</body>
+</html>
