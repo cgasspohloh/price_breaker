@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "npx webpack && node server.js"
+    "start": "npm install -D webpack-cli && npx webpack && node server.js"
   },
   "author": "",
   "license": "ISC",
