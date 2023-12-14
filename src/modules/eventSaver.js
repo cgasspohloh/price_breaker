@@ -4,6 +4,7 @@ export function eventSaver(newEvent, eventListings) {
     const eventDiv = document.createElement('div');
     eventDiv.id = newEvent.eventId;
     eventDiv.classList.add('savedEvent');
+    toggleClickedEvent(eventDiv);
 
     // Store data within the closure
     eventDiv._savedNewEvent = newEvent;
@@ -34,7 +35,7 @@ export function eventSaver(newEvent, eventListings) {
     // Create and append event location element
     const eventLocationElement = document.createElement('p');
     eventLocationElement.classList.add('eventLocation', 'eventInfo');
-    eventLocationElement.textContent = newEvent.location;
+    eventLocationElement.textContent = newEvent.city;
     eventDiv.appendChild(eventLocationElement);
 
     // Use a closure to store data within the eventDiv
@@ -48,4 +49,18 @@ export function eventSaver(newEvent, eventListings) {
     // Append the new event div to the "event-container" div
     const eventContainer = document.getElementById('event-container');
     eventContainer.appendChild(eventDiv);
+}
+
+export function toggleClickedEvent(el) {
+    // find and remove all "clicked" classes
+    const allSavedEvents =  document.getElementsByClassName("savedEvent");
+
+    // Iterate through each element in the HTMLCollection
+    for (let i = 0; i < allSavedEvents.length; i++) {
+        // Remove the "clicked" class from each element
+        allSavedEvents[i].classList.remove("clicked");
+    }
+
+    // add 'clicked' class to the target element
+    el.classList.add('clicked');
 }

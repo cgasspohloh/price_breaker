@@ -8,10 +8,11 @@ export function handleEventDetails(eventData) {
     
     const newEvent = {
         name: event.event_name,
-        date: event.event_date,
+        date: event.event_date.substring(0,10),
         location: `At the ${event.venue_name} in beautiful ${event.city}`,
         urlLink: 'https://www.ticketmaster.com/event/' + event.url_id,
-        eventId: event.url_id
+        eventId: event.url_id,
+        city: event.city
     }
 
     return newEvent;

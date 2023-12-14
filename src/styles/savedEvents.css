@@ -1,35 +1,100 @@
-#event-container {
+  #event-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    width: fit-content;
   }
   
   .savedEvent {
-    border: 1px solid #ccc;
+    border: 4px solid #ccc;
     padding: 10px;
     max-width: 200px;
     position: relative;
   }
 
+  .savedEvent:hover {
+    border: 4px solid #010687;
+    cursor: pointer;
+  }
+
+  .savedEvent:active {
+    box-shadow: 0 5px #689ff7;
+    transform: scale(0.9);
+  }
+
   .savedEvent p {
     margin: 0px;
+    font-size: 15px;
   }
   
   .eventName {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin: 0px;
+    font-size: 16px;
+    padding-right: 15px;
+    padding-left: 5px;
   }
   
   .deleteEventButton {
     position: absolute;
-    top: 5px;
+    top: 2px;
     right: 5px;
-    color: #ff0000;
+    color: #fa5c5c;
     font-weight: bolder;
     font-size: large;
     border: none;
-    padding: 5px;
+    padding: 0%;
     cursor: pointer;
   }
+
+  .deleteEventButton:hover {
+    transform: scale(1.2);
+  }
+
+  .eventLocation {
+    font-weight: bold;
+  }
+
+  #savedEvents {
+    padding: 20px;
+    border-top: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+  }
+
+  #savedEvents h2 {
+    margin-top: 0px;
+  }
   
+  .savedEvent.clicked {
+    border: 4px solid #010687;
+    transform: scale(1.1);
+  }
+
+  #savedEvents {
+    padding: 20px;
+    border-top: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    position: relative;
+  }
+
+#savedEvents h2 {
+    margin-top: 0px;
+}
+
+#refetchAllButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#refetchAllButton:hover {
+    background-color: #45a049;
+}

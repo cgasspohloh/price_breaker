@@ -13,29 +13,42 @@
 <body>
   <div id="content">
 
-    <h1>Price Breaker</h1>
+    <div id="fixed-content">
+      <h1>Price Breaker</h1>
 
-    <form id="eventIdForm">
-      <label for="eventId">Event ID:</label>
-      <input type="text" id="eventId" name="eventId" required>
-      <button class="button-64" type="submit">Add Event</button>
-    </form>
+      <form id="eventIdForm">
+        <label for="eventId">Event ID:</label>
+        <input type="text" id="eventIdInput" name="eventId" required>
+        <button class="add-event" type="submit">Add Event</button>
+      </form>
 
-    <div id="savedEvents">
-      <h2>Events</h2>
-      <div id="event-container">
-        <!-- saved events render here-->
+      <div id="savedEvents">
+        <h2>Events</h2>
+        <div id="event-container">
+            <!-- saved events render here-->
+        </div>
+        <button id="refetchAllButton" class="refetch-button">Re-Fetch All</button>
+    </div>
+
+      <div id="eventDetailResult">
+        <h2 id="eventName"></h2>
+        <p id="eventDate"></p>
+        <p id="location"></p>
+        <a id="eventLink" href="#" target="_blank"></a>
       </div>
     </div>
 
-    <div id="eventDetailResult">
-      <h2 id="eventName"></h2>
-      <p id="eventDate"></p>
-      <p id="location"></p>
-      <a id="eventLink" href="#" target="_blank"></a>
+    <div class="table-container">
+      <div class="sidebar">
+        <h3>Filters</h3>
+        <label for="cheapest-toggle">Show Cheapest</label>
+        <input type="checkbox" id="cheapest-toggle" class="isCheapestShown" checked>
+      </div>
+    
+      <div id="result">
+        <!-- data table goes here -->
+      </div>
     </div>
-
-    <div id="result"></div>
 
   </div>
 </body>
