@@ -1,7 +1,17 @@
 // turns event details into an object
 export function handleEventDetails(eventData) {
+
+    // check if data is available, if not send back filler info
     if (!eventData || !eventData.dataFromBowman || !eventData.dataFromBowman.event) {
-        return undefined; // Return undefined if eventData or eventData.dataFromBowman or eventData.dataFromBowman.event is undefined
+        const fillerEvent = {
+            name: "Data not available from Bowman",
+            date: "",
+            location: "",
+            urlLink: "",
+            eventId: document.getElementById('eventIdInput').value,
+            city: "",
+        }
+        return fillerEvent;
     }
 
     const event = eventData.dataFromBowman.event;

@@ -1,3 +1,4 @@
+
 // save the events for quicker access
 export function eventSaver(newEvent, eventListings) {
     // Create a new event div
@@ -37,14 +38,6 @@ export function eventSaver(newEvent, eventListings) {
     eventLocationElement.classList.add('eventLocation', 'eventInfo');
     eventLocationElement.textContent = newEvent.city;
     eventDiv.appendChild(eventLocationElement);
-
-    // Use a closure to store data within the eventDiv
-    eventDiv.addEventListener('click', function () {
-        // Retrieve the data from the closure
-        const savedNewEvent = eventDiv._savedNewEvent;
-        const savedEventListings = eventDiv._savedEventListings;
-
-    });
 
     // Append the new event div to the "event-container" div
     const eventContainer = document.getElementById('event-container');

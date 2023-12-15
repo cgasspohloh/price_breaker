@@ -9,7 +9,7 @@ export default function renderTable(eventData) {
     // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th>Ticket Type</th><th>Section</th><th>Unit Cost</th><th>Unit Fees</th><th>Total Cost</th>';
+    headerRow.innerHTML = '<th>Ticket Type</th><th>Levels</th><th>Section</th><th>Unit Cost</th><th>Unit Fees</th><th>Total Cost</th>';
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
@@ -20,8 +20,9 @@ export default function renderTable(eventData) {
     const ticketTypes = {};
 
     eventData.forEach((listing) => {
-        // Create an object for the current section
+        // Create an object for the current section 
         const listingDetails = {
+            level: listing.level,
             sectionName: listing.sectionName,
             unitCost: listing.unitCost,
             unitFees: listing.unitFees,
@@ -61,27 +62,38 @@ export default function renderTable(eventData) {
     })) {
         const ticketTypeRow = document.createElement('tr');
         ticketTypeRow.classList.add('collapsible', sanitizeClassName(ticketTypeId));
-        ticketTypeRow.innerHTML = `<td class="first-col">${ticketTypes[ticketTypeId].ticketTypeName}</td><td></td><td></td><td></td><td></td>`;
+        ticketTypeRow.innerHTML = `<td class="first-col">${ticketTypes[ticketTypeId].ticketTypeName}</td><td></td><td></td><td></td><td></td><td></td>`;
         tbody.appendChild(ticketTypeRow);
 
-        // Initialize the cheapest unit cost for each section
+        // Initialize the cheapest unit cost for each section and level
         const cheapestUnitCostPerSection = {};
+        const cheapestUnitCostPerLevel = {};
 
-        ticketTypes[ticketTypeId].sections.forEach(({ sectionName, unitCost, unitFees, totalCost }) => {
+        ticketTypes[ticketTypeId].sections.forEach(({ level, sectionName, unitCost, unitFees, totalCost }) => {
             const sectionRow = document.createElement('tr');
             sectionRow.classList.add('content', sanitizeClassName(ticketTypeId));
             sectionRow.style.display = 'none';
-            sectionRow.innerHTML = `<td></td><td>${sectionName}</td><td>$${unitCost}</td><td>$${unitFees}</td><td>$${totalCost}</td>`;
+            sectionRow.innerHTML = `<td></td><td>${level}</td><td>${sectionName}</td><td>$${unitCost}</td><td>$${unitFees}</td><td>$${totalCost}</td>`;
             tbody.appendChild(sectionRow);
 
             // Add "cheapest" class to the row with the lowest unit cost in each section
             if (!cheapestUnitCostPerSection[sectionName] || unitCost < cheapestUnitCostPerSection[sectionName].unitCost) {
                 if (cheapestUnitCostPerSection[sectionName]) {
-                    cheapestUnitCostPerSection[sectionName].row.classList.remove('cheapest');
+                    cheapestUnitCostPerSection[sectionName].row.classList.remove('cheapest-section');
                 }
 
-                sectionRow.classList.add('cheapest', 'display');
+                sectionRow.classList.add('cheapest-section', 'display');
                 cheapestUnitCostPerSection[sectionName] = { unitCost, row: sectionRow };
+            }
+
+            // Add "cheapest-level" class to the row with the lowest unit cost in each level
+            if (!cheapestUnitCostPerLevel[level] || unitCost < cheapestUnitCostPerLevel[level].unitCost) {
+                if (cheapestUnitCostPerLevel[level]) {
+                    cheapestUnitCostPerLevel[level].row.classList.remove('cheapest-level');
+                }
+
+                sectionRow.classList.add('cheapest-level', 'display');
+                cheapestUnitCostPerLevel[level] = { unitCost, row: sectionRow };
             }
         });
 

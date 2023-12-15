@@ -24,19 +24,36 @@ app.post('/fetchData', async (req, res) => {
     const eventId = req.body.eventId;
     const apiUrl1 = `https://bowman.plessinc.com/api/events/${eventId}`;
     const apiUrl2 = `https://mcdavid.plessinc.com/criteria/${eventId}`;
-    
-    const response1 = await axios.get(apiUrl1);
-    const response2 = await axios.get(apiUrl2);
 
-    res.json({
-      dataFromBowman: response1.data,
-      dataFromMcDavid: response2.data,
-    });
+    // Check if a specific API is requested
+    const requestedApi = req.body.api; // This should be a string, either 'bowman' or 'mcdavid'
+
+    let responseData;
+
+    if (requestedApi === 'bowman') {
+      const response = await axios.get(apiUrl1);
+      responseData =  { dataFromBowman: response.data };
+    } else if (requestedApi === 'mcdavid') {
+      const response = await axios.get(apiUrl2);
+      responseData = { dataFromMcDavid: response.data };
+    } else {
+      // If no specific API is requested, return both responses
+      const response1 = await axios.get(apiUrl1);
+      const response2 = await axios.get(apiUrl2);
+
+      responseData = {
+        dataFromBowman: response1.data,
+        dataFromMcDavid: response2.data,
+      };
+    }
+
+    res.json(responseData);
   } catch (error) {
     console.error('Error fetching data:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Start the server
 app.listen(port, () => {

@@ -1,60 +1,100 @@
 import { handleEventDetails, handleListingDetails} from "./modules/dataHandler";
 import fillEventDetails from "./modules/eventDetails";
 import { eventSaver, toggleClickedEvent } from "./modules/eventSaver";
+import { fetchData } from "./modules/fetchData";
+import levels from "./modules/levelHandler";
 import renderTable from "./modules/renderTable";
-import showCheapest from "./modules/showCheapest";
+import { setTimer } from "./modules/setTimer";
+import showCheapestSection from "./modules/showCheapest";
 
 let eventData;
 let eventDetails;
 let listingDetails;
 const savedEvents = document.getElementById('event-container');
+let isCheapestSectionShown = true;
 
+// submit button event for new event added
 document.getElementById('eventIdForm').addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const eventId = document.getElementById('eventIdInput').value;
-  fetchData(eventId);
+  eventData = await fetchData(eventId);
+
+  eventDetails = handleEventDetails(eventData);
+  listingDetails = handleListingDetails(eventData);
+  listingDetails = levels(listingDetails);
+  eventSaver(eventDetails, listingDetails);
+  fillEventDetails(eventDetails);
+  renderTable(listingDetails);
+  levels(listingDetails);
+
+  // clear input field
+  document.getElementById('eventIdInput').value = '';
 });
 
+
+// listener for re-fetching listing data
 document.addEventListener('DOMContentLoaded', function () {
   const refetchAllButton = document.getElementById('refetchAllButton');
+  const timeDropdown = document.getElementById('timeDropdown');
 
   refetchAllButton.addEventListener('click', function () {
-      // Perform actions when the "Re-Fetch All" button is clicked
-      // For example, you can re-fetch all events or trigger any relevant functionality.
-      // You might want to call the function fetchDataAndRenderTable() or any other suitable function.
+    const selectedTime = timeDropdown.value;
+
+    if (selectedTime !== 'now') {
+      // Calculate the time until the selected time
+      const currentTime = new Date();
+      const selectedHour = parseInt(selectedTime.split(':')[0], 10);
+      const selectedMinute = parseInt(selectedTime.split(':')[1], 10);
+      const selectedDateTime = new Date(currentTime);
+      selectedDateTime.setHours(selectedHour, selectedMinute, 0, 0);
+
+      const timeDifference = selectedDateTime - currentTime;
+
+      if (timeDifference > 0) {
+        setTimer(timeDifference);
+        // Set a timer to trigger the re-fetch at the selected time
+        setTimeout(function () {
+          // Call the existing re-fetch function
+          console.log("Timer up: Re-fetching Data")
+          reFetchData();
+        }, timeDifference);
+      } else {
+        console.error('Selected time has already passed for today.');
+      }
+    } else {
+      // If "NOW" is selected, re-fetch immediately
+      reFetchData();
+    }
   });
+
+  // Your existing reFetchData function
+  function reFetchData() {
+    const allSavedEvents = document.getElementsByClassName('savedEvent');
+
+    for (let i = 0; i < allSavedEvents.length; i++) {
+      const savedEvent = allSavedEvents[i];
+      const eventId = savedEvent._savedNewEvent.eventId;
+
+      fetchData(eventId, 'mcdavid')
+        .then((eventData) => {
+          // re-process the data
+          listingDetails = handleListingDetails(eventData);
+          listingDetails = levels(listingDetails);
+          // re-save the listings to the event
+          savedEvent._savedEventListings = listingDetails;
+          // if it is the clicked event, render
+          if (savedEvent.classList.contains('clicked')) {
+            renderTable(listingDetails);
+          }
+        })
+        .catch((error) => {
+          console.error(`Error fetching data for event ID ${eventId}:`, error.message);
+        });
+    }
+  }
 });
 
-// module this
-async function fetchData(eventId) {
-  try {
-      const response = await fetch('/fetchData', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ eventId }),
-      });
-
-      if (!response.ok) {
-          throw new Error('Error fetching data');
-      }
-
-      eventData = await response.json();
-
-      eventDetails = handleEventDetails(eventData);
-      listingDetails = handleListingDetails(eventData);
-      eventSaver(eventDetails, listingDetails);
-      fillEventDetails(eventDetails);
-      renderTable(listingDetails);
-
-      // Optionally, clear the input field in the HTML
-      // eventIdInput.value = '';
-  } catch (error) {
-      console.error('Error:', error.message);
-  }
-}
 
 // event listner to load saved events when clicked
 savedEvents.addEventListener('click', (event) => {
@@ -72,15 +112,11 @@ savedEvents.addEventListener('click', (event) => {
   }
 });
 
-// Example of calling the function on a button click
-const toggleSwitch = document.getElementById('cheapest-toggle');
-// Initial state
-let isCheapestShown = true;
 
+// Toggle cheapest section
+const toggleSwitch = document.getElementById('cheapest-section-toggle');
 toggleSwitch.addEventListener('change', function() {
-  isCheapestShown = !isCheapestShown;
+  isCheapestSectionShown = !isCheapestSectionShown;
 
-  showCheapest(isCheapestShown);
+  showCheapestSection(isCheapestSectionShown);
 });
-
-

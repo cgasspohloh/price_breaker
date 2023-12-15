@@ -84,17 +84,55 @@
     margin-top: 0px;
 }
 
+
+/* re-fetch and drop down */
+.dropdown-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 120px;
+}
+
+#drop-down-label {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 2;
+  right: 100px;
+}
+
+#timeDropdown {
+  padding: 10px;
+  font-size: 12px;
+  border: 3px solid black;
+}
+
 #refetchAllButton {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  margin: 15px;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 #refetchAllButton:hover {
-    background-color: #45a049;
+  background-color: #45a049;
+}
+
+#timerCount {
+  position: absolute;
+  font-size: 12px;
+  top: 0;
+  right: 0;
+  display: block;
+  margin-top: 50px;
+  margin-right: 45px;
+  font-weight: bold;
+  color: #ff0000; /* Adjust color as needed */
 }

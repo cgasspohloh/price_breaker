@@ -27,8 +27,25 @@
         <div id="event-container">
             <!-- saved events render here-->
         </div>
+        <div class="dropdown-container">
+            <label id="drop-down-label" for="timeDropdown">Select Time:</label>
+            <select id="timeDropdown">
+                <option value="now">NOW</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:30">12:00</option>
+                <option value="13:00">1:00</option>
+                <option value="14:00">2:00</option>
+                <option value="15:00">3:00</option>
+                <option value="16:00">4:00</option>
+                <option value="17:00">5:00</option>
+            </select>
+        </div>
         <button id="refetchAllButton" class="refetch-button">Re-Fetch All</button>
+        <p id="timerCount"></p>
     </div>
+    
 
       <div id="eventDetailResult">
         <h2 id="eventName"></h2>
@@ -41,8 +58,8 @@
     <div class="table-container">
       <div class="sidebar">
         <h3>Filters</h3>
-        <label for="cheapest-toggle">Show Cheapest</label>
-        <input type="checkbox" id="cheapest-toggle" class="isCheapestShown" checked>
+        <label for="cheapest-section-toggle">Show Cheapest Per Section</label>
+        <input type="checkbox" id="cheapest-section-toggle" class="isCheapestSectionShown" checked>
       </div>
     
       <div id="result">

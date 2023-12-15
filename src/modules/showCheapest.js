@@ -1,16 +1,16 @@
-export default function showCheapest(isCheapestShown) {
+export default function showCheapestSection(isCheapestSectionShown) {
 
     const cheapestRows = document.querySelectorAll('.cheapest');
     const allRows = document.querySelectorAll('tr.content');  
 
-    // if show cheapest is not clicked, add display class to all rows
-    if(!isCheapestShown) {
+    // if show cheapest section is not clicked, add display class to all rows
+    if(!isCheapestSectionShown) {
         allRows.forEach((row) => {
             row.classList.add('display');
           });
     } else {
         allRows.forEach((row) => {
-            if (!row.classList.contains('cheapest')) {
+            if (!row.classList.contains('cheapest-section')) {
                 row.classList.remove('display');
             }
         });
