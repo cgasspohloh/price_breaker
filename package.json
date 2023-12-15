@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack --mode production",
+    "build": "npm install -D webpack-cli && webpack --mode production",
     "dev": "webpack --watch --mode development",
     "prestart": "npm run build"
   },
