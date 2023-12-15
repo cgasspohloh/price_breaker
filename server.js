@@ -2,9 +2,13 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const favicon = require('serve-favicon');
+require('dotenv').config();
+
 
 const app = express();
 const port = process.env.PORT || 3000;
+const bowman = process.env.BOWMAN_URL;
+const mcdavid = process.env.MCDAVID_URL;
 
 // Middleware to parse JSON and handle URL encoded data and favicon
 app.use(express.json());
@@ -22,8 +26,8 @@ app.get('/', (req, res) => {
 app.post('/fetchData', async (req, res) => {
   try {
     const eventId = req.body.eventId;
-    const apiUrl1 = `https://bowman.plessinc.com/api/events/${eventId}`;
-    const apiUrl2 = `https://mcdavid.plessinc.com/criteria/${eventId}`;
+    const apiUrl1 = `${bowman}${eventId}`;
+    const apiUrl2 = `${mcdavid}${eventId}`;
 
     // Check if a specific API is requested
     const requestedApi = req.body.api; // This should be a string, either 'bowman' or 'mcdavid'
