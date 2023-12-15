@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx webpack",
     "start": "node server.js",
-    "postinstall": "npm run build"
+    "postinstall": "npm install -g webpack-cli && npm run build"
   },
   "author": "",
   "license": "ISC",
