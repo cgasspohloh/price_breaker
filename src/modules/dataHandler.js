@@ -14,17 +14,21 @@ export function handleEventDetails(eventData) {
         return fillerEvent;
     }
 
-    const event = eventData.dataFromBowman.event;
+    const eventBowman = eventData.dataFromBowman.event;
+    const eventDiscovery = eventData.dataFromDiscovery
     
     const newEvent = {
-        name: event.event_name,
-        date: event.event_date.substring(0,10),
-        location: `At the ${event.venue_name} in beautiful ${event.city}`,
-        urlLink: 'https://www.ticketmaster.com/event/' + event.url_id,
-        eventId: event.url_id,
-        city: event.city
+        name: eventBowman.event_name,
+        date: eventBowman.event_date.substring(0,10),
+        location: `At the ${eventBowman.venue_name} in beautiful ${eventBowman.city}`,
+        urlLink: 'https://www.ticketmaster.com/event/' + eventBowman.url_id,
+        eventId: eventBowman.url_id,
+        city: eventBowman.city,
+        seatingMap: eventDiscovery.seatmap.staticUrl,
+        ticketLimit: eventDiscovery.ticketLimit.info,
+        sales: eventDiscovery.sales
     }
-
+    console.log(newEvent)
     return newEvent;
 }
 

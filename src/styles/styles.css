@@ -103,7 +103,17 @@ button {
 
 #result {
   flex: 1; /* Take remaining space */
+  max-width: calc(50%); /* 20px accounts for the margin on both sides */
   /* Other styles for the result div */
+}
+
+#venue-map {
+  max-width: calc(50% - 20px);
+}
+
+#venue-map img {
+  max-width: 100%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
 }
 
 #cheapest-section-toggle {

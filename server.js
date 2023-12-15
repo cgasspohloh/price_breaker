@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const bowman = process.env.BOWMAN_URL;
 const mcdavid = process.env.MCDAVID_URL;
+const tmApiKey = process.env.TM_API_KEY;
 
 // Middleware to parse JSON and handle URL encoded data and favicon
 app.use(express.json());
@@ -43,11 +44,15 @@ app.post('/fetchData', async (req, res) => {
     } else {
       // If no specific API is requested, return both responses
       const response1 = await axios.get(apiUrl1);
+      const bowmanEventId = response1.data.event.id;
+      const tmApiUrl = `https://app.ticketmaster.com/discovery/v2/events/${bowmanEventId}.json?apikey=${tmApiKey}`;
       const response2 = await axios.get(apiUrl2);
+      const response3 = await axios.get(tmApiUrl);
 
       responseData = {
         dataFromBowman: response1.data,
         dataFromMcDavid: response2.data,
+        dataFromDiscovery: response3.data
       };
     }
 
@@ -57,6 +62,7 @@ app.post('/fetchData', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 // Start the server
