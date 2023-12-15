@@ -13,6 +13,7 @@ export function setTimer(timeDifference) {
   
       if (remainingTime < 0) {
         clearInterval(timerInterval);
+        timerElement = "";
       }
 
     }, 1000);

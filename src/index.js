@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // Call the existing re-fetch function
           console.log("Timer up: Re-fetching Data")
           reFetchData();
-        }, timeDifference);
+        }, timeDifference + 10000);
       } else {
         console.error('Selected time has already passed for today.');
       }
