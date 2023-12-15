@@ -28,7 +28,6 @@ export function handleEventDetails(eventData) {
         ticketLimit: eventDiscovery.ticketLimit.info,
         sales: eventDiscovery.sales
     }
-    console.log(newEvent)
     return newEvent;
 }
 
