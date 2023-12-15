@@ -108,7 +108,7 @@ button {
 }
 
 #venue-map {
-  max-width: calc(50% - 20px);
+  max-width: calc(40% - 20px);
 }
 
 #venue-map img {
