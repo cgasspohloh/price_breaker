@@ -4,7 +4,7 @@
   "description": "Price Break Finding Tool",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "npx webpack",
     "start": "node server.js",
     "postinstall": "npm install -g webpack-cli && npm run build"
   },
