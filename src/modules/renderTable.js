@@ -30,11 +30,26 @@ export default function renderTable(eventData) {
         };
 
         if (!ticketTypes[listing.ticketTypeId]) {
-            ticketTypes[listing.ticketTypeId] = { sections: [] };
+            ticketTypes[listing.ticketTypeId] = { sections: [], uniquePairs: new Set() };
         }
 
         ticketTypes[listing.ticketTypeId].ticketTypeName = listing.ticketTypeName; // Store ticketTypeName in the ticket type object
         ticketTypes[listing.ticketTypeId].sections.push(listingDetails);
+
+        // Check if the level and unit cost pair is unique for this ticket type
+        const pairKey = `${listing.level}_${listing.unitCost}`;
+        const isUniquePair = !ticketTypes[listing.ticketTypeId].uniquePairs.has(pairKey);
+
+        // Add the unique pair to the set
+        if (isUniquePair) {
+            ticketTypes[listing.ticketTypeId].uniquePairs.add(pairKey);
+            listingDetails.uniquePricing = true; // Set uniqueLevel to true if the pair is unique
+        } else {
+            listingDetails.uniquePricing = false;
+        }
+
+        console.log(listingDetails)
+        
     });
 
     // Sort sections within each ticket type by sectionName and unitCost
@@ -63,15 +78,27 @@ export default function renderTable(eventData) {
         const ticketTypeRow = document.createElement('tr');
         ticketTypeRow.classList.add('collapsible', sanitizeClassName(ticketTypeId));
         ticketTypeRow.innerHTML = `<td class="first-col">${ticketTypes[ticketTypeId].ticketTypeName}</td><td></td><td></td><td></td><td></td><td></td>`;
+        
+        // Check if uniquePricing is true and add class "unique-pricing"
+        if (ticketTypes[ticketTypeId].uniquePricing) {
+            ticketTypeRow.classList.add('unique-pricing');
+        }
+    
         tbody.appendChild(ticketTypeRow);
 
         // Initialize the cheapest unit cost for each section and level
         const cheapestUnitCostPerSection = {};
         const cheapestUnitCostPerLevel = {};
 
-        ticketTypes[ticketTypeId].sections.forEach(({ level, sectionName, unitCost, unitFees, totalCost }) => {
+        ticketTypes[ticketTypeId].sections.forEach(({ level, sectionName, unitCost, unitFees, totalCost, uniqueLevel, uniquePricing }) => {
             const sectionRow = document.createElement('tr');
             sectionRow.classList.add('content', sanitizeClassName(ticketTypeId));
+
+            // Check if uniquePricing is true and add class "unique-pricing"
+            if (uniquePricing) {
+                sectionRow.classList.add('unique-pricing');
+            }
+
             sectionRow.style.display = 'none';
             sectionRow.innerHTML = `<td></td><td>${level}</td><td>${sectionName}</td><td>$${unitCost}</td><td>$${unitFees}</td><td>$${totalCost}</td>`;
             tbody.appendChild(sectionRow);
@@ -112,17 +139,17 @@ export default function renderTable(eventData) {
             for (let i = 0; i < contentRows.length; i++) {
                 contentRows[i].classList.toggle('expanded');
             }
-    
         });
-        }   
+    }
 
-        table.appendChild(tbody);
-        resultDiv.appendChild(table);
-    
-        function sanitizeClassName(name) {
-            // Replace spaces and special characters with underscores
-            const sanitizedName = name.replace(/[^\w]/g, '_');
-            // Ensure the class name starts with a letter
-            return `_${sanitizedName}`;
-        }
+    table.appendChild(tbody);
+    resultDiv.appendChild(table);
+
+}
+
+function sanitizeClassName(name) {
+    // Replace spaces and special characters with underscores
+    const sanitizedName = name.replace(/[^\w]/g, '_');
+    // Ensure the class name starts with a letter
+    return `_${sanitizedName}`;
 }

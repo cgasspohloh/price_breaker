@@ -106,7 +106,14 @@ button {
   /* Other styles for the result div */
 }
 
-#cheapest-toggle {
+#cheapest-section-toggle {
+  margin-bottom: 20px;
+  height: 15px;
+  width: 15px;
+}
+
+#unqiue-pricing-toggle {
+  margin-bottom: 20px;
   height: 15px;
   width: 15px;
 }

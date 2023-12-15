@@ -6,12 +6,14 @@ import levels from "./modules/levelHandler";
 import renderTable from "./modules/renderTable";
 import { setTimer } from "./modules/setTimer";
 import showCheapestSection from "./modules/showCheapest";
+import filterRows from "./modules/filterRows";
 
 let eventData;
 let eventDetails;
 let listingDetails;
 const savedEvents = document.getElementById('event-container');
 let isCheapestSectionShown = true;
+let uniqueToggled = true;
 
 // submit button event for new event added
 document.getElementById('eventIdForm').addEventListener('submit', async (event) => {
@@ -27,6 +29,7 @@ document.getElementById('eventIdForm').addEventListener('submit', async (event) 
   fillEventDetails(eventDetails);
   renderTable(listingDetails);
   levels(listingDetails);
+  filterRows(isCheapestSectionShown, uniqueToggled);
 
   // clear input field
   document.getElementById('eventIdInput').value = '';
@@ -86,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // if it is the clicked event, render
           if (savedEvent.classList.contains('clicked')) {
             renderTable(listingDetails);
+            filterRows(isCheapestSectionShown, uniqueToggled);
           }
         })
         .catch((error) => {
@@ -114,9 +118,17 @@ savedEvents.addEventListener('click', (event) => {
 
 
 // Toggle cheapest section
-const toggleSwitch = document.getElementById('cheapest-section-toggle');
-toggleSwitch.addEventListener('change', function() {
+const toggleCheapSections = document.getElementById('cheapest-section-toggle');
+toggleCheapSections.addEventListener('change', function() {
   isCheapestSectionShown = !isCheapestSectionShown;
 
-  showCheapestSection(isCheapestSectionShown);
+  filterRows(isCheapestSectionShown, uniqueToggled);
+});
+
+// Toggle cheapest section
+const toggleUnique = document.getElementById('unqiue-pricing-toggle');
+toggleUnique.addEventListener('change', function() {
+  uniqueToggled = !uniqueToggled;
+
+  filterRows(isCheapestSectionShown, uniqueToggled);
 });
