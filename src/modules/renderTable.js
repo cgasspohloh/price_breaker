@@ -47,8 +47,6 @@ export default function renderTable(eventData) {
         } else {
             listingDetails.uniquePricing = false;
         }
-
-        console.log(listingDetails)
         
     });
 

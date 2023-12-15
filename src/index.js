@@ -5,7 +5,6 @@ import { fetchData } from "./modules/fetchData";
 import levels from "./modules/levelHandler";
 import renderTable from "./modules/renderTable";
 import { setTimer } from "./modules/setTimer";
-import showCheapestSection from "./modules/showCheapest";
 import filterRows from "./modules/filterRows";
 
 let eventData;

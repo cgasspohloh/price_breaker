@@ -1,32 +1,29 @@
 export default function filterRows(isCheapestSectionShown,uniqueToggled) {
 
-    const cheapestRows = document.querySelectorAll('.cheapest-section');
-    const uniqueRows = document.querySelectorAll('.unique-pricing');
     const allRows = document.querySelectorAll('tr.content');  
 
-    // if show cheapest section is not clicked, add display class to all rows
+    allRows.forEach((row) => {
+        row.classList.add('display');
+    });
+
+    // if for each scenerio
     if(!uniqueToggled && !isCheapestSectionShown) {
-        allRows.forEach((row) => {
-            row.classList.add('display');
-          });
+        //nothing changes, all rows showing
     } else if (!uniqueToggled && isCheapestSectionShown) {
         allRows.forEach((row) => {
-            row.classList.add('display');
             if (!row.classList.contains('cheapest-section')) {
                 row.classList.remove('display');
             }
         });
     } else if (uniqueToggled && !isCheapestSectionShown) {
         allRows.forEach((row) => {
-            row.classList.add('display');
             if (!row.classList.contains('unique-pricing')) {
                 row.classList.remove('display');
             }
         });
     } else if (uniqueToggled && isCheapestSectionShown) {
         allRows.forEach((row) => {
-            row.classList.add('display');
-            if (!row.classList.contains('unique-pricing')) {
+            if (!row.classList.contains('cheapest-level')) {
                 row.classList.remove('display');
             }
         });
@@ -42,3 +39,4 @@ export default function filterRows(isCheapestSectionShown,uniqueToggled) {
     });
 
 }
+
