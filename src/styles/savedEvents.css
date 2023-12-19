@@ -1,15 +1,15 @@
   #event-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    flex-direction: column;
     width: fit-content;
+    overflow-y: auto;
+    height: 625px;
   }
   
   .savedEvent {
     border: 4px solid #ccc;
     padding: 10px;
-    max-width: 200px;
+    width: 275px;
     position: relative;
   }
 
@@ -44,10 +44,11 @@
     right: 5px;
     color: #fa5c5c;
     font-weight: bolder;
-    font-size: large;
+    font-size: 20px;
     border: none;
-    padding: 0%;
+    padding: 5px;
     cursor: pointer;
+    z-index: 1;
   }
 
   .deleteEventButton:hover {
@@ -58,81 +59,19 @@
     font-weight: bold;
   }
 
-  #savedEvents {
-    padding: 20px;
-    border-top: 4px solid #000000;
-    border-bottom: 4px solid #000000;
-  }
-
   #savedEvents h2 {
-    margin-top: 0px;
+    margin-top: 25px;
   }
   
   .savedEvent.clicked {
     border: 4px solid #010687;
-    transform: scale(1.1);
   }
-
-  #savedEvents {
-    padding: 20px;
-    border-top: 4px solid #000000;
-    border-bottom: 4px solid #000000;
-    position: relative;
-  }
-
-#savedEvents h2 {
-    margin-top: 0px;
-}
-
 
 /* re-fetch and drop down */
-.dropdown-container {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  right: 120px;
-}
 
-#drop-down-label {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 2;
-  right: 100px;
-}
-
-#timeDropdown {
-  padding: 10px;
-  font-size: 12px;
-  border: 3px solid black;
-}
-
-#refetchAllButton {
-  position: absolute;
-  margin: 15px;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-#refetchAllButton:hover {
-  background-color: #45a049;
-}
 
 #timerCount {
-  position: absolute;
-  font-size: 12px;
-  top: 0;
-  right: 0;
-  display: block;
-  margin-top: 50px;
-  margin-right: 45px;
   font-weight: bold;
-  color: #ff0000; /* Adjust color as needed */
+  color: #ff0000; 
+  font-size: 12px;
 }

@@ -7,6 +7,8 @@ export default function fillEventDetails(newEvent) {
   const eventLinkElement = document.getElementById('eventLink');
   const venueMapElement = document.getElementById('venue-map');
 
+  const salesElement = document.getElementById('sales');
+
   // Clear the existing event details
   eventNameElement.textContent = '';
   eventDateElement.textContent = '';
@@ -14,6 +16,8 @@ export default function fillEventDetails(newEvent) {
   ticketLimitElement.textContent = '';
   eventLinkElement.href = '';
   eventLinkElement.textContent = '';
+  salesElement.textContent = '';
+  salesElement.innerHTML = `<h2><strong>Todays Sales</strong></h2>`
 
   // Check if the newEvent exists and has the necessary properties
   if (newEvent && newEvent.name && newEvent.date && newEvent.location && newEvent.ticketLimit && newEvent.urlLink) {
@@ -23,6 +27,12 @@ export default function fillEventDetails(newEvent) {
     ticketLimitElement.textContent = newEvent.ticketLimit;
     eventLinkElement.href = newEvent.urlLink;
     eventLinkElement.textContent = '  Ticketmaster Link';
+
+    newEvent.sales.forEach((sale) => {
+      const saleInfoElement = document.createElement('p');
+      saleInfoElement.textContent = `${sale.name} starting at ${sale.start}`
+      salesElement.append(saleInfoElement);
+    })
 
     // Check if seatingMap exists
     if (newEvent.seatingMap) {

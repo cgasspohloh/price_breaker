@@ -18,6 +18,10 @@ let uniqueToggled = true;
 document.getElementById('eventIdForm').addEventListener('submit', async (event) => {
   event.preventDefault();
 
+  const submitIcon = document.getElementById('button__icon');
+  submitIcon.classList.add('loader');
+  submitIcon.innerHTML = `<div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>`;
+
   const eventId = document.getElementById('eventIdInput').value;
   eventData = await fetchData(eventId);
 
@@ -32,6 +36,8 @@ document.getElementById('eventIdForm').addEventListener('submit', async (event) 
 
   // clear input field
   document.getElementById('eventIdInput').value = '';
+  submitIcon.classList.remove('loader');
+  submitIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg>`
 });
 
 
@@ -73,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // Your existing reFetchData function
   function reFetchData() {
     const allSavedEvents = document.getElementsByClassName('savedEvent');
+    refetchAllButton.classList.add('loader');
+    refetchAllButton.innerHTML = `<div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>`;
 
     for (let i = 0; i < allSavedEvents.length; i++) {
       const savedEvent = allSavedEvents[i];
@@ -90,9 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
             renderTable(listingDetails);
             filterRows(isCheapestSectionShown, uniqueToggled);
           }
+          refetchAllButton.innerHTML = 'Re-Fetch All'
+          refetchAllButton.classList.remove('loader');
         })
         .catch((error) => {
           console.error(`Error fetching data for event ID ${eventId}:`, error.message);
+          refetchAllButton.innerHTML = 'Re-Fetch All'
+          refetchAllButton.classList.remove('loader');
         });
     }
   }

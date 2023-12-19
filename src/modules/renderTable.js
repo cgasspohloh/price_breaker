@@ -9,7 +9,7 @@ export default function renderTable(eventData) {
     // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th>Ticket Type</th><th>Levels</th><th>Section</th><th>Unit Cost</th><th>Unit Fees</th><th>Total Cost</th>';
+    headerRow.innerHTML = '<th>Ticket Type</th><th>Level</th><th>Section</th><th>Unit Cost</th><th>Unit Fees</th><th>Total Cost</th>';
     thead.appendChild(headerRow);
     table.appendChild(thead);
 

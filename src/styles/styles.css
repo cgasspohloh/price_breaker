@@ -1,16 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0px;
-  padding: 0;
-  background-color: #f4f4f4;
-  text-align: -webkit-center;
-}
-
-h1 {
-  text-align: center;
-  margin-top: 20px;
-}
-
 .data-table th {
   background-color: #000000;
   font-weight: bolder;
@@ -45,9 +32,9 @@ button {
 }
 
 #result {
-  margin: 20px;
-  width: 75vw;
-  height: 55vh;
+  margin: 25px;
+  width: auto;
+  height: 95%;
   overflow-y: auto;
 }
 
@@ -84,46 +71,29 @@ button {
 }
 
 #eventIdInput {
-  height: 25px;
+  height: 35px;
 }
 
-/* Side bar and table*/
-.table-container {
+#eventIdForm {
   display: flex;
+  text-align: center;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.sidebar {
-  width: 200px; /* Adjust the width as needed */
-  padding: 20px;
-  border: 1px solid #ddd; /* Add borders or other styles */
-  box-sizing: border-box;
-  margin-top: 40px;
-  margin-bottom: 10px;
+#fixed-content h1 {
+  font-size: 2.5rem;
 }
 
-#result {
-  flex: 1; /* Take remaining space */
-  max-width: calc(50%); /* 20px accounts for the margin on both sides */
-  /* Other styles for the result div */
+#refetchAll-container {
+  align-items: center;
+  gap: 20px;
 }
 
-#venue-map {
-  max-width: calc(40% - 20px);
-}
-
-#venue-map img {
-  max-width: 100%; /* Make the image responsive */
-  height: auto; /* Maintain aspect ratio */
-}
-
-#cheapest-section-toggle {
-  margin-bottom: 20px;
-  height: 15px;
-  width: 15px;
-}
-
-#unqiue-pricing-toggle {
-  margin-bottom: 20px;
-  height: 15px;
-  width: 15px;
+#timeDropdown {
+  height: 40px;
+  width: 80px;
+  text-align: center;
 }

@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/dist/main.js" defer></script>
-  <link rel="stylesheet" type="text/css" href="/src/styles/styles.css">
+  
   <link rel="stylesheet" type="text/css" href="/src/styles/savedEvents.css">
   <link rel="stylesheet" type="text/css" href="/src/styles/buttons.css">
+  <link rel="stylesheet" type="text/css" href="/src/styles/layout-grid.css">
+  <link rel="stylesheet" type="text/css" href="/src/styles/styles.css">
   <link rel="icon" href="/src/img/favicon/favicon.ico" type="image/x-icon" />
   <title>Price Breaker V1.0</title>
 </head>
@@ -14,39 +16,29 @@
   <div id="content">
 
     <div id="fixed-content">
+      
       <h1>Price Breaker</h1>
 
       <form id="eventIdForm">
-        <label for="eventId">Event ID:</label>
-        <input type="text" id="eventIdInput" name="eventId" required>
-        <button class="add-event" type="submit">Add Event</button>
+        <input type="text" id="eventIdInput" name="eventId" required placeholder="Enter Event ID">
+        <button type="submit" class="button">
+          <span class="button__text">Add Event</span>
+          <span class="button__icon" id="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+        </button>
       </form>
+    </div>
 
+    <div id="grid-2">
       <div id="savedEvents">
         <h2>Events</h2>
         <div id="event-container">
             <!-- saved events render here-->
         </div>
-        <div class="dropdown-container">
-            <label id="drop-down-label" for="timeDropdown">Select Time:</label>
-            <select id="timeDropdown">
-                <option value="now">NOW</option>
-                <option value="9:00">9:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:30">12:00</option>
-                <option value="13:00">1:00</option>
-                <option value="14:00">2:00</option>
-                <option value="15:00">3:00</option>
-                <option value="16:00">4:00</option>
-                <option value="17:00">5:00</option>
-            </select>
-        </div>
-        <button id="refetchAllButton" class="refetch-button">Re-Fetch All</button>
-        <p id="timerCount"></p>
+        
+      </div>
     </div>
     
-
+    <div id="grid-3">
       <div id="eventDetailResult">
         <h2 id="eventName"></h2>
         <p id="eventDate"></p>
@@ -56,26 +48,63 @@
       </div>
     </div>
 
-    <div class="table-container">
-      <div class="sidebar">
-        <h3>Filters</h3>
-        <div>
-          <label for="cheapest-section-toggle">Show Cheapest Per Section / Level</label>
-          <input type="checkbox" id="cheapest-section-toggle" class="toggles" checked>
-        </div>
-        <div>
-          <label for="unqiue-pricing-toggle">Show Prices Per Level</label>
-          <input type="checkbox" id="unqiue-pricing-toggle" class="toggles" checked>
-        </div>
-      </div>
+    <div id="grid-4">
+      <div id="sales">
     
+      </div>
+      
+    </div>
+
+    <div class="sidebar">
+      <h3>Filters</h3>
+      <div class="cl-toggle-switch" id="section-toggle">
+        <p style="margin: 0; font-weight: bold;">Show Cheapest</p>
+        <label class="cl-switch" for="cheapest-section-toggle">Off
+          <input type="checkbox" id="cheapest-section-toggle" class="toggles" checked>
+          <span></span>
+        </label>
+        <span style="margin-left: 5px;">On</span>
+        
+      </div>
+      <div class="cl-toggle-switch" id="level-toggle">
+        <p style="margin: 0; font-weight: bold;">Show Price By</p>
+        <label class="cl-switch" for="unqiue-pricing-toggle">Section
+          <input type="checkbox" id="unqiue-pricing-toggle" class="toggles" checked>
+          <span></span>
+        </label>
+        <span style="margin-left: 5px;">Levels</span>
+      </div>
+
+      <div id="refetchAll-container">
+        <div class="dropdown-container">
+          <label id="drop-down-label" for="timeDropdown"></label>
+          <select id="timeDropdown">
+              <option value="now">NOW</option>
+              <option value="9:00">9:00</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:30">12:00</option>
+              <option value="13:00">1:00</option>
+              <option value="14:00">2:00</option>
+              <option value="15:00">3:00</option>
+              <option value="16:00">4:00</option>
+              <option value="17:00">5:00</option>
+          </select>
+        </div>
+        <button id="refetchAllButton" class="refetch-button">Re-Fetch All</button>
+        <p id="timerCount"></p>
+      </div>
+    </div>
+
+    <div class="table-container">
       <div id="result">
         <!-- data table goes here -->
       </div>
 
-      <div id="venue-map">
-        <!-- map renders here -->
-      </div>
+    </div>
+
+    <div id="venue-map">
+      <!-- map renders here -->
     </div>
 
   </div>

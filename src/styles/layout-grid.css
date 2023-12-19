@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0px;
+    padding: 0;
+    background-color: #f4f4f4;
+    text-align: -webkit-center;
+    background-image: url(/src/img/background/v904-nunny-012.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#content {
+    margin: 10px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 500px 300px auto;
+    grid-template-rows: 150px 225px 300px 1fr ;
+    grid-gap: 20px;
+}
+
+#fixed-content {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-items: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: whitesmoke;
+}
+
+#grid-2 {
+    grid-column: 2 / 3;
+    grid-row: 1 / 4;
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+#grid-3 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: whitesmoke;
+}
+
+#grid-4 {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: whitesmoke;
+}
+
+.sidebar {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: whitesmoke;
+}
+
+.table-container {
+    grid-column: 3 / 4;
+    grid-row: 2 / 5;
+    border: 2 px solid black;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: whitesmoke;
+    height: 97.8%;
+}
+
+#venue-map {
+    grid-column: 1 / 3;
+    grid-row: 4 / 5;
+    align-self: auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: whitesmoke;
+    height: 95%;
+}
+
+#venue-map img {
+    max-width: 550px; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+
+/* Sidebar grid schema */
+
+.sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px 50px 50px;
+    place-items: center
+}
+
+.sidebar h3 {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    margin-bottom: 0;
+}
+
+#section-toggle {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    align-self: start;
+}
+
+#level-toggle {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+
+#refetchAll-container {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+}
+
